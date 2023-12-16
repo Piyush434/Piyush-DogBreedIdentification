@@ -5,8 +5,6 @@ import cv2
 import numpy as np
 import pickle
 
-model = pickle.load(open('model.pkl','rb'))
-classes = pickle.load(open('classes.pkl','rb'))
 INPUT_SHAPE = 256
 
 plt.figure(figsize=(12, 8))
@@ -16,6 +14,8 @@ st.divider()
 if img_main is not None:
     img = Image.open(img_main)
     img = cv2.resize(img, (INPUT_SHAPE, INPUT_SHAPE))
+    model = pickle.load(open('model.pkl','rb'))
+    classes = pickle.load(open('classes.pkl','rb'))
     pred = model.predict(np.expand_dims(img, 0), verbose=False)
     cls_index = np.argmax(pred)
     cls_name = classes[cls_index]
@@ -23,5 +23,3 @@ if img_main is not None:
     st.devider()
     st.image(img)
     st.header({cls_name})
-else:
-    st.subheader(':heavy_exclamation_mark: Please upload the image')
