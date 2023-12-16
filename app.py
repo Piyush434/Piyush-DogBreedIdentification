@@ -13,7 +13,6 @@ st.divider()
 
 if img_main is not None:
     img = Image.open(img_main)
-    img = cv2.resize(img, (INPUT_SHAPE, INPUT_SHAPE))
     model = pickle.load(open('model.pkl','rb'))
     classes = pickle.load(open('classes.pkl','rb'))
     pred = model.predict(np.expand_dims(img, 0), verbose=False)
