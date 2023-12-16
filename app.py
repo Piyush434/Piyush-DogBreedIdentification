@@ -13,12 +13,15 @@ plt.figure(figsize=(12, 8))
 img_main = st.file_uploader('Upload a PNG image', type=['png', 'jpg', 'jpeg'])
 st.divider()
 
-img = Image.open(img_main)
-img = cv2.resize(img, (INPUT_SHAPE, INPUT_SHAPE))
-pred = model.predict(np.expand_dims(img, 0), verbose=False)
-cls_index = np.argmax(pred)
-cls_name = classes[cls_index]
+if img_main is not None:
+    img = Image.open(img_main)
+    img = cv2.resize(img, (INPUT_SHAPE, INPUT_SHAPE))
+    pred = model.predict(np.expand_dims(img, 0), verbose=False)
+    cls_index = np.argmax(pred)
+    cls_name = classes[cls_index]
 
-st.devider()
-st.image(img)
-st.header({cls_name})
+    st.devider()
+    st.image(img)
+    st.header({cls_name})
+else:
+    st.subheader(':heavy_exclamation_mark: Please upload the image')
