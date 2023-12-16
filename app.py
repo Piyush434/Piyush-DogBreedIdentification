@@ -18,10 +18,7 @@ img = cv2.resize(img, (INPUT_SHAPE, INPUT_SHAPE))
 pred = model.predict(np.expand_dims(img, 0), verbose=False)
 cls_index = np.argmax(pred)
 cls_name = classes[cls_index]
-plt.subplot(230 + i + 1)
-        plt.imshow(img)
-        plt.axis('off')
-        plt.title(f'True Class: {samples.loc[[index], "breed"].values[0]} \n Predicted Class: {cls_name}')
-    
-plt.tight_layout()
-plt.show()
+
+st.devider()
+st.image(img)
+st.header({cls_name})
